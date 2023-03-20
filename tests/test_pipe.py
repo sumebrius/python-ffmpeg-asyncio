@@ -4,10 +4,13 @@ from helpers import probe
 
 from ffmpeg import FFmpeg
 
+import pytest
+
 epsilon = 0.25
 
 
-def test_input_via_stdin(
+@pytest.mark.asyncio
+async def test_input_via_stdin(
     assets_path: Path,
     tmp_path: Path,
 ):
@@ -24,7 +27,7 @@ def test_input_via_stdin(
                 codec="copy",
             )
         )
-        ffmpeg.execute(source_file)
+        await ffmpeg.execute(source_file)
 
     source = probe(source_path)
     target = probe(target_path)
@@ -36,7 +39,8 @@ def test_input_via_stdin(
     assert source["streams"][1]["codec_name"] == target["streams"][1]["codec_name"]
 
 
-def test_output_via_stdout(
+@pytest.mark.asyncio
+async def test_output_via_stdout(
     assets_path: Path,
     tmp_path: Path,
 ):
@@ -52,7 +56,7 @@ def test_output_via_stdout(
             f="ogg",
         )
     )
-    target_bytes = ffmpeg.execute()
+    target_bytes = await ffmpeg.execute()
     with open(target_path, "wb") as target_file:
         target_file.write(target_bytes)
 

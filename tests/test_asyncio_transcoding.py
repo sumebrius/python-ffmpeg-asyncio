@@ -3,7 +3,8 @@ from pathlib import Path
 import pytest
 from helpers import probe
 
-from ffmpeg.asyncio import FFmpeg
+import ffmpeg
+from ffmpeg import FFmpeg
 
 epsilon = 0.25
 
@@ -13,6 +14,8 @@ async def test_asyncio_transcoding(
     assets_path: Path,
     tmp_path: Path,
 ):
+    global ffmpeg
+    print(ffmpeg.__dict__)
     source_path = assets_path / "pier-39.ts"
     target_path = tmp_path / "pier-39.mp4"
 

@@ -4,10 +4,13 @@ from helpers import probe
 
 from ffmpeg import FFmpeg
 
+import pytest
+
 epsilon = 0.25
 
 
-def test_transcoding(
+@pytest.mark.asyncio
+async def test_transcoding(
     assets_path: Path,
     tmp_path: Path,
 ):
@@ -22,7 +25,7 @@ def test_transcoding(
             codec="copy",
         )
     )
-    ffmpeg.execute()
+    await ffmpeg.execute()
 
     source = probe(source_path)
     target = probe(target_path)

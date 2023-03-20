@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from helpers import probe
 
-from ffmpeg.asyncio import FFmpeg
+from ffmpeg import FFmpeg
 
 epsilon = 0.25
 
