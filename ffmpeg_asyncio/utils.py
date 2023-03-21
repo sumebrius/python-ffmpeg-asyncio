@@ -9,7 +9,7 @@ from collections.abc import AsyncIterable, Awaitable
 from datetime import timedelta
 from typing import IO, Any
 
-from ffmpeg import types
+from . import types
 
 
 def parse_time(time: str) -> timedelta:

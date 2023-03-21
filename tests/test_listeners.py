@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from ffmpeg import FFmpeg
+from ffmpeg_asyncio import FFmpeg
 
 
 @pytest.mark.asyncio

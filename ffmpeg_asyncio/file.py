@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ffmpeg.options import Option
+    from .options import Option
 
 
 @dataclass(frozen=True)

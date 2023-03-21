@@ -7,7 +7,7 @@ from typing import Optional
 
 from typing_extensions import Self
 
-from ffmpeg.utils import parse_time
+from .utils import parse_time
 
 # Reference: https://github.com/FFmpeg/FFmpeg/blob/release/5.1/fftools/ffmpeg.c#L1507
 

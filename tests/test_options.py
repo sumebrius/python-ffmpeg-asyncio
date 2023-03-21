@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-from ffmpeg.options import Options
+from ffmpeg_asyncio.options import Options
 
 
 def test_options(assets_path: Path, tmp_path: Path):

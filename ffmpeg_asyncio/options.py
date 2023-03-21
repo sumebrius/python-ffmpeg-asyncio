@@ -5,8 +5,8 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Optional, Union
 
-from ffmpeg import types
-from ffmpeg.file import InputFile, OutputFile
+from . import types
+from .file import InputFile, OutputFile
 
 
 def _unpack_options(options: dict[str, Optional[types.Option]]) -> Iterable[Option]:

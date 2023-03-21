@@ -5,7 +5,7 @@ from typing import Any, Callable, Optional, Union
 
 from typing_extensions import Protocol, Self, overload
 
-from ffmpeg import types
+from . import types
 
 
 class FFmpegProtocol(Protocol):

@@ -10,10 +10,10 @@ from typing import Optional, Union
 from pyee.asyncio import AsyncIOEventEmitter
 from typing_extensions import Self
 
-from ffmpeg import types
-from ffmpeg.options import Options
-from ffmpeg.progress import Tracker
-from ffmpeg.utils import create_subprocess, ensure_stream_reader, is_windows, read_stream, readlines
+from . import types
+from .options import Options
+from .progress import Tracker
+from .utils import create_subprocess, ensure_stream_reader, is_windows, read_stream, readlines
 
 
 class FFmpegError(Exception):
