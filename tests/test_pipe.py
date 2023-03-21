@@ -1,16 +1,15 @@
 from pathlib import Path
 
+import pytest
 from helpers import probe
 
 from ffmpeg import FFmpeg
-
-import pytest
 
 epsilon = 0.25
 
 
 @pytest.mark.asyncio
-async def test_input_via_stdin(
+async def test_asyncio_input_via_stdin(
     assets_path: Path,
     tmp_path: Path,
 ):
@@ -18,16 +17,18 @@ async def test_input_via_stdin(
     target_path = tmp_path / "pier-39.mp4"
 
     with open(source_path, "rb") as source_file:
-        ffmpeg = (
-            FFmpeg()
-            .option("y")
-            .input("pipe:0")
-            .output(
-                str(target_path),
-                codec="copy",
-            )
+        source_bytes = source_file.read()
+
+    ffmpeg = (
+        FFmpeg()
+        .option("y")
+        .input("pipe:0")
+        .output(
+            str(target_path),
+            codec="copy",
         )
-        await ffmpeg.execute(source_file)
+    )
+    await ffmpeg.execute(source_bytes)
 
     source = probe(source_path)
     target = probe(target_path)
@@ -38,9 +39,8 @@ async def test_input_via_stdin(
     assert source["streams"][0]["codec_name"] == target["streams"][0]["codec_name"]
     assert source["streams"][1]["codec_name"] == target["streams"][1]["codec_name"]
 
-
 @pytest.mark.asyncio
-async def test_output_via_stdout(
+async def test_asyncio_output_via_stdout(
     assets_path: Path,
     tmp_path: Path,
 ):
