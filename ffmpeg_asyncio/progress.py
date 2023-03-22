@@ -3,8 +3,8 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from datetime import timedelta
 
-from ffmpeg.protocol import FFmpegProtocol
-from ffmpeg.statistics import Statistics
+from .protocol import FFmpegProtocol
+from .stats import Statistics
 
 
 @dataclass(frozen=True)
