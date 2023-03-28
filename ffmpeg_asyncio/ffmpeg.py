@@ -33,7 +33,6 @@ class FFmpeg(AsyncIOEventEmitter):
 
         self._process: asyncio.subprocess.Process
         self._executed: bool = False
-        self._terminated: bool = False
 
         self._tracker = Tracker(self)  # type: ignore
 
@@ -107,7 +106,6 @@ class FFmpeg(AsyncIOEventEmitter):
             raise FFmpegError("FFmpeg is already executed")
 
         self._executed = False
-        self._terminated = False
 
         if stream is not None:
             stream = await ensure_stream_reader(stream)
@@ -136,10 +134,8 @@ class FFmpeg(AsyncIOEventEmitter):
 
         if self._process.returncode == 0:
             self.emit("completed")
-        elif self._terminated:
-            self.emit("terminated")
         else:
-            raise FFmpegError(f"Non-zero exit status {self._process.returncode}")
+            self.emit("terminated", self._process.returncode)
 
         return tasks[1].result()
 
@@ -161,7 +157,6 @@ class FFmpeg(AsyncIOEventEmitter):
             # - https://github.com/FFmpeg/FFmpeg/blob/release/5.1/fftools/ffmpeg.c#L371
             sigterm = signal.CTRL_BREAK_EVENT  # type: ignore
 
-        self._terminated = True
         self._process.send_signal(sigterm)
 
     async def _write_stdin(self, stream: Optional[asyncio.StreamReader]):
