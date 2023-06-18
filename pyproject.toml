@@ -2,6 +2,28 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "ffmpeg-asyncio"
+description = "A fork of the excellent python-ffmpeg binding for FFmpeg, updated for native async API support only."
+readme = "README.md"
+dynamic = ["version"]
+authors = [{ name = "Bruce Cutler", email = "bruce@sumebrius.net" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["ffmpeg", "asyncio"]
+dependencies = [
+    "pyee",
+    "typing-extensions",
+]
+requires-python = ">=3.6"
+
+[tool.setuptools.dynamic]
+version = {attr = "ffmpeg_asyncio.__version__"}
+
 [tool.black]
 line-length = 120
 
