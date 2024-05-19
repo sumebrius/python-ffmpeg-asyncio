@@ -1,4 +1,4 @@
-# python-ffmpeg
+# ffmpeg-asyncio
 
 A fork of the excellent [`python-ffmpeg`](https://python-ffmpeg.readthedocs.io) binding for FFmpeg, updated for native async API support only.
 
