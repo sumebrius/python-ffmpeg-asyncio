@@ -28,8 +28,8 @@ _field_factory = {
 
 @dataclass(frozen=True)
 class Statistics:
-    frame: int = 0
-    fps: float = 0.0
+    frame: Optional[int] = None
+    fps: Optional[float] = None
     size: int = 0
     time: timedelta = field(default_factory=timedelta)
     bitrate: float = 0.0

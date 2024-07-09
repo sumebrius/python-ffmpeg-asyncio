@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 from datetime import timedelta
+from typing import Optional
 
 from .protocol import FFmpegProtocol
 from .stats import Statistics
@@ -20,8 +21,8 @@ class Progress:
         speed: The processing speed
     """
 
-    frame: int
-    fps: float
+    frame: Optional[int]
+    fps: Optional[float]
     size: int
     time: timedelta
     bitrate: float

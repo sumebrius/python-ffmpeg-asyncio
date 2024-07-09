@@ -30,8 +30,8 @@ def test_stats_line_parsing():
 
     for line in sample_lines_no_frame:
         assert Statistics.from_line(line) == Statistics(
-            frame=0,
-            fps=0.0,
+            frame=None,
+            fps=None,
             size=8_942_592,
             time=timedelta(seconds=3),
             bitrate=23832.3,
