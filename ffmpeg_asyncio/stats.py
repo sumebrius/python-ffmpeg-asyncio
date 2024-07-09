@@ -11,7 +11,7 @@ from .utils import parse_time
 
 # Reference: https://github.com/FFmpeg/FFmpeg/blob/release/5.1/fftools/ffmpeg.c#L1507
 
-_pattern = re.compile(r"(frame|fps|size|time|bitrate|speed)\s*\=\s*(\S+)")
+_field_pattern = re.compile(r"(frame|fps|size|time|bitrate|speed)\s*\=\s*(?!N/A)(\S+)")
 _size_suffix = re.compile(r"(k|Ki)B$")
 _rate_suffix = re.compile(r"kbits/s$")
 _speed_pattern = re.compile(r"x$")
@@ -37,9 +37,7 @@ class Statistics:
 
     @classmethod
     def from_line(cls, line: str) -> Optional[Self]:
-        statistics = {key: value for key, value in _pattern.findall(line) if value != "N/A"}
-        if not statistics:
+        fields = {key: _field_factory[key](value) for key, value in _field_pattern.findall(line)}
+        if not fields:
             return None
-
-        fields = {key: _field_factory[key](value) for key, value in statistics.items()}
         return Statistics(**fields)

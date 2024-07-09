@@ -37,3 +37,11 @@ def test_stats_line_parsing():
             bitrate=23832.3,
             speed=106,
         )
+
+
+def test_na_exclusion():
+    stats = Statistics.from_line(
+        "size=       N/A time=00:00:03.00 bitrate=23832.3kbits/s speed=  N/A",
+    )
+    assert stats.size == 0
+    assert stats.speed == 0.0
