@@ -1,4 +1,4 @@
 from .ffmpeg import FFmpeg, FFmpegError
 from .progress import Progress
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
