@@ -12,14 +12,17 @@ from .utils import parse_time
 # Reference: https://github.com/FFmpeg/FFmpeg/blob/release/5.1/fftools/ffmpeg.c#L1507
 
 _pattern = re.compile(r"(frame|fps|size|time|bitrate|speed)\s*\=\s*(\S+)")
+_size_suffix = re.compile(r"(k|Ki)B$")
+_rate_suffix = re.compile(r"kbits/s$")
+_speed_pattern = re.compile(r"x$")
 
 _field_factory = {
     "frame": int,
     "fps": float,
-    "size": lambda item: int(item.replace("kB", "")) * 1024,
+    "size": lambda item: int(re.sub(_size_suffix, "", item)) * 1024,
     "time": parse_time,
-    "bitrate": lambda item: float(item.replace("kbits/s", "")),
-    "speed": lambda item: float(item.replace("x", "")),
+    "bitrate": lambda item: float(re.sub(_rate_suffix, "", item)),
+    "speed": lambda item: float(re.sub(_speed_pattern, "", item)),
 }
 
 
